@@ -19,25 +19,26 @@ Examples:
 
 
 def find_second_largest_bf(nums):
-    n = len(nums)
     largest = float("-inf")
-    s_largest = float("-inf")
+    second_largest = float("-inf")
 
-    for number in nums:
-        if number > largest:
-            s_largest = largest
-            largest = number
+    # First pass → find the largest
+    for num in nums:
+        if num > largest:
+            largest = num
 
-    for number in nums:
-        if number > s_largest and number != largest:
-            s_largest = number
+    # Second pass → find the largest element < largest
+    for num in nums:
+        if num != largest and num > second_largest:
+            second_largest = num
 
-    if s_largest == float("-inf"):
-        s_largest = largest
+    # If all elements were equal OR no smaller number existed
+    if second_largest == float("-inf"):
+        return largest
 
-    return s_largest
+    return second_largest
 
 
-print(find_second_largest_bf([3, 1, 5, 7, 4]))
-print(find_second_largest_bf([9, 3, 6, 1, 9, 8]))
-print(find_second_largest_bf([1, 1, 1, 1]))
+# print(find_second_largest_bf([3, 1, 5, 7, 4]))  # 5
+# print(find_second_largest_bf([9, 3, 6, 1, 9, 8]))  # 8
+# print(find_second_largest_bf([1, 1, 1, 1]))  # 1
